@@ -26,6 +26,48 @@ export class TodoRouter {
   }
 
   /**
+   * GET all Todos.
+   */
+  public apiaiHook(req: Request, res: Response, next: NextFunction) {
+    console.log("Hook Request");   
+        var speech = 'empty speech';
+
+        if (req.body) {
+            var requestBody = req.body;
+
+            if (requestBody.result) {
+               // speech = '';
+
+                /*if (requestBody.result.fulfillment) {
+                    speech += requestBody.result.fulfillment.speech;
+                    speech += ' ';
+                }*/
+
+                if (requestBody.result.action == "add_todo") {
+                    //speech += 'action: ' + requestBody.result.action;
+                    console.log("Action is ",requestBody.result.action);
+                    console.log("Todo to add is ",requestBody.result.parameters.todo);
+                     database.getDB().collection('todos').insert({nombre:requestBody.result.parameters.todo,completada:false},(err,result)=>{
+                        if(err){
+                            throw err;
+                        }
+                        return res.json({
+                          speech: `${requestBody.result.parameters.todo} added to your list, anything else?`,
+                          displayText: speech,
+                          source: 'apiai-webhook-sample'
+                      });
+                    });  
+                }
+            }
+        }
+
+        
+    
+    
+    
+  }
+
+  /**
    * CREATE new Todo.
    */
   public createOne(req: Request, res: Response, next: NextFunction) {
@@ -45,6 +87,7 @@ export class TodoRouter {
   init() {
     this.router.get('/', this.getAll);
     this.router.post('/', this.createOne);
+    this.router.post('/hook', this.apiaiHook);
     
   }
 

@@ -11,7 +11,7 @@ const tsProject = ts.createProject('tsconfig.json');
 
 gulp.task('browser-sync', ['nodemon', 'watch'], function () {
     browserSync.init(null, {
-        proxy: "localhost:3000",
+        proxy: "localhost:3002",
         files: ["dist/public/**/*.*", "dist/views/**/*.*"],
         port: 7000,
     });
