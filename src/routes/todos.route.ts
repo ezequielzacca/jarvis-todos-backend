@@ -76,10 +76,16 @@ export class TodoRouter {
             console.log("err: ",err);
             console.log("sentiment: ",sentiment);
             if (sentiment) {
-              if (sentiment.score < 0) {
+              if (sentiment.score < 0.3) {
                 return res.json({
                   speech: "Whoaaa take it easy man, im just a poor bot",
                   displayText: "Whoaaa take it easy man, im just a poor bot",
+                  source: 'apiai-webhook-sample'
+                });
+              }else if (sentiment.score > 0.3) {
+                return res.json({
+                  speech: "Its always great to talk with nice people",
+                  displayText: "Its always great to talk with nice people",
                   source: 'apiai-webhook-sample'
                 });
               } else {
