@@ -54,7 +54,7 @@ export class TodoRouter {
                         let possibleAnswers = [`${requestBody.result.parameters.todo} added to your list, anything else?`,`I've just added ${requestBody.result.parameters.todo} to your list, can i help you with something else?`]
                         return res.json({
                           speech: possibleAnswers[Math.floor(Math.random()*possibleAnswers.length)],
-                          displayText: speech,
+                          displayText: possibleAnswers[Math.floor(Math.random()*possibleAnswers.length)],
                           source: 'apiai-webhook-sample'
                       });
                     });  
