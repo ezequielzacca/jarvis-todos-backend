@@ -33,6 +33,7 @@
     "typescript": "^2.2.2"
   },
   "dependencies": {
+    "@google-cloud/language": "^0.10.3",
     "body-parser": "^1.17.1",
     "cors": "^2.8.3",
     "debug": "^2.6.3",

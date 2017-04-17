@@ -38,7 +38,7 @@ gulp.task('nodemon', function (cb) {
     });
 });
 
-gulp.task('scripts', () => {
+gulp.task('scripts', ['assets'], () => {
     const tsResult = tsProject.src().pipe(sourcemaps.init())
         .pipe(tsProject());
 return tsResult.js.pipe(sourcemaps.write({
