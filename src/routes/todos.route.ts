@@ -52,7 +52,9 @@ export class TodoRouter {
                             throw err;
                         }
                         let possibleAnswers = [`${requestBody.result.parameters.todo} added to your list, anything else?`,`I've just added ${requestBody.result.parameters.todo} to your list, can i help you with something else?`]
-                        let speech = possibleAnswers[Math.floor(Math.random()*possibleAnswers.length)];
+                        let random  = Math.floor(Math.random()*possibleAnswers.length);
+                        console.log("random value: ",random);
+                        let speech = possibleAnswers[random];
                         return res.json({
                           speech: speech,
                           displayText: speech,
