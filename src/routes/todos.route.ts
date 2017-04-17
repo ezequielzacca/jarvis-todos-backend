@@ -75,8 +75,10 @@ export class TodoRouter {
           document.detectSentiment(function (err, sentiment) {
             console.log("err: ",err);
             console.log("sentiment: ",sentiment);
+            console.log("sentiment is positive: ",sentiment.score > 0.3);
+            console.log("sentiment is negative: ",sentiment.score <= -0.3);
             if (sentiment) {
-              if (sentiment.score < 0.3) {
+              if (sentiment.score <= -0.3) {
                 return res.json({
                   speech: "Whoaaa take it easy man, im just a poor bot",
                   displayText: "Whoaaa take it easy man, im just a poor bot",
