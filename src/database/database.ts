@@ -8,7 +8,7 @@ let _db;
 
   export function connectToServer(){
     console.log("Connect to server called")
-    MongoClient.connect( "mongodb://localhost/saludya", function( err, db ) {
+    MongoClient.connect( "mongodb://localhost/jarvis_todos", function( err, db ) {
         if(err){
             console.log(err);
         }

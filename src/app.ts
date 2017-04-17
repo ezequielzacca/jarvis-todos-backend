@@ -11,7 +11,7 @@ import * as database from  "./database/database";
 
 
 //Routers
-import MedicosRouter from "./routes/medicos.route";
+import TodoRouter from "./routes/todos.route";
 
 
 // Creates and configures an ExpressJS web server.
@@ -59,7 +59,7 @@ class App {
         });
         //Aca yo pondria todas las rutas de mi app
         this.express.use('/', router);
-        this.express.use('/api/v1/medicos', MedicosRouter);
+        this.express.use('/api/v1/todos', TodoRouter);
     }
 
 }

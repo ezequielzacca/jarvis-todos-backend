@@ -1,12 +1,12 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import * as database from "../database/database";
-const MEDICOS = [];
 
-export class MedicosRouter {
+
+export class TodoRouter {
   router: Router
 
   /**
-   * Initialize the MedicosRouter
+   * Initialize the Todo Router
    */
   constructor() {
     this.router = Router();
@@ -14,22 +14,22 @@ export class MedicosRouter {
   }
 
   /**
-   * GET all Medicos.
+   * GET all Todos.
    */
   public getAll(req: Request, res: Response, next: NextFunction) {
-    database.getDB().collection('medicos').find({}).toArray((err,medicos)=>{
+    database.getDB().collection('todos').find({}).toArray((err,todos)=>{
       if(err)
         throw err;
-      res.json(medicos);
+      res.json(todos);
     });  
     
   }
 
   /**
-   * GET all Medicos.
+   * CREATE new Todo.
    */
   public createOne(req: Request, res: Response, next: NextFunction) {
-    database.getDB().collection('medicos').insert(req.body,(err,result)=>{
+    database.getDB().collection('todos').insert(req.body,(err,result)=>{
         if(err){
             throw err;
         }
@@ -50,8 +50,8 @@ export class MedicosRouter {
 
 }
 
-// Create the HeroRouter, and export its configured Express.Router
-const medicosRouter = new MedicosRouter();
-medicosRouter.init();
+// Create the TodosRouter, and export its configured Express.Router
+const todosRouter = new TodoRouter();
+todosRouter.init();
 
-export default medicosRouter.router;
+export default todosRouter.router;
