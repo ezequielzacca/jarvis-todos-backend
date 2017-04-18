@@ -54,7 +54,13 @@ export class TodoRouter {
             if (err) {
               throw err;
             }
-            let possibleAnswers = [`${requestBody.result.parameters.todo} added to your list, anything else?`, `I've just added ${requestBody.result.parameters.todo} to your list, can i help you with something else?`]
+            let possibleAnswers = [
+                `${requestBody.result.parameters.todo} added to your list, anything else?`,
+                `I've just added ${requestBody.result.parameters.todo} to your list, can i help you with something else?`,
+                `Your wishes are orders, ${requestBody.result.parameters.todo} added, any other Todo?`,
+                `${requestBody.result.parameters.todo} shipped right onto the list, can i do anything else for you?`,
+                `Done, ${requestBody.result.parameters.todo} was added, can i do any more things for you?`
+               ]
             let random = Math.floor(Math.random() * possibleAnswers.length);
             console.log("random value: ", random);
             let speech = possibleAnswers[random];
