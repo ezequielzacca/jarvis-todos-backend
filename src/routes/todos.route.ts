@@ -79,7 +79,7 @@ export class TodoRouter {
             if (err) {
               throw err;
             }
-            console.log(removed[0]);
+            console.log(removed);
             let possibleAnswers = [
                 `${removed.length} todos matched and removed from your list, anything else?`,
                 `I've just removed ${removed.length} todos that matched, can i help you with something else?`,
