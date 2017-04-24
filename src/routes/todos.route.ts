@@ -79,8 +79,10 @@ export class TodoRouter {
             if (err) {
               throw err;
             }
-            console.log(removed.result.n);
+            
             let cantidad = removed.result.n;
+            console.log("la cantidad es", cantidad);
+            console.log(cantidad>0);
             if (cantidad > 0) {
               let possibleAnswers = [
                 `${cantidad} todos matched and removed from your list, anything else?`,
