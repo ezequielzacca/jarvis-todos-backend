@@ -86,8 +86,9 @@ export class TodoRouter {
                 `Yes, showing list right now`,
               ]
               let listText = "";
+              var contador = 1;
               results.map(result => {
-                listText += "    \n" + result;
+                listText += `\n    ${contador}.- ${result.nombre}`;
               });
               let random = Math.floor(Math.random() * possibleAnswers.length);
               console.log("random value: ", random);
