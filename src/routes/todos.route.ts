@@ -71,6 +71,51 @@ export class TodoRouter {
               source: 'apiai-webhook-sample'
             });
           });
+        } else if (requestBody.result.action == "list_todos") {
+          //speech += 'action: ' + requestBody.result.action;
+          console.log("Action is ", requestBody.result.action);
+          database.getDB().collection('todos').find({}).toArray((err, results) => {
+            if (err) {
+              throw err;
+            }
+            if (results.length > 0) {
+              let possibleAnswers = [
+                `Of course, here it goes`,
+                `This is your list`,
+                `As requested, enjoy it`,
+                `Yes, showing list right now`,
+              ]
+              let listText = "";
+              results.map(result => {
+                listText += "    \n" + result;
+              });
+              let random = Math.floor(Math.random() * possibleAnswers.length);
+              console.log("random value: ", random);
+              let speech = possibleAnswers[random] + listText;
+              return res.json({
+                speech: speech,
+                displayText: speech,
+                source: 'apiai-webhook-sample'
+              });
+            } else {
+              let possibleAnswers = [
+                `Yes but first add some, because its empty`,
+                `Maybe you could add a few, right now it has zero`,
+                `As requested, enjoy an empty list (?`,
+                `I'd suggest you to add some, because there is no todos to show right now`,
+              ]
+              
+              let random = Math.floor(Math.random() * possibleAnswers.length);
+              console.log("random value: ", random);
+              let speech = possibleAnswers[random];
+              return res.json({
+                speech: speech,
+                displayText: speech,
+                source: 'apiai-webhook-sample'
+              });
+            }
+
+          });
         } else if (requestBody.result.action == "delete_todo") {
           //speech += 'action: ' + requestBody.result.action;
           console.log("Action is ", requestBody.result.action);
@@ -79,10 +124,10 @@ export class TodoRouter {
             if (err) {
               throw err;
             }
-            
+
             let cantidad = removed.result.n;
             console.log("la cantidad es", cantidad);
-            console.log(cantidad>0);
+            console.log(cantidad > 0);
             if (cantidad > 0) {
               let possibleAnswers = [
                 `${cantidad} todos matched and removed from your list, anything else?`,
