@@ -71,6 +71,32 @@ export class TodoRouter {
               source: 'apiai-webhook-sample'
             });
           });
+        }else if (requestBody.result.action == "delete_todo") {
+          //speech += 'action: ' + requestBody.result.action;
+          console.log("Action is ", requestBody.result.action);
+          console.log("Todo to delete is ", requestBody.result.parameters.todo);
+          database.getDB().collection('todos').findAndRemove({$text:{$search:requestBody.result.parameters.todo}}, (err, removed) => {
+            if (err) {
+              throw err;
+            }
+            console.log(removed[0]);
+            let possibleAnswers = [
+                `${removed.length} todos matched and removed from your list, anything else?`,
+                `I've just removed ${removed.length} todos that matched, can i help you with something else?`,
+                `Your wishes are orders, ${removed.length} todos removed`,
+                `${removed.length} todos finished their existence, can i do anything else for you?`,
+                `Done, ${removed.length} todos were deleted, can i do any more things for you?`,
+                `Im happy to annouce you that ${removed.length} todos were kicked from your list, if you need anything else...`
+               ]
+            let random = Math.floor(Math.random() * possibleAnswers.length);
+            console.log("random value: ", random);
+            let speech = possibleAnswers[random];
+            return res.json({
+              speech: speech,
+              displayText: speech,
+              source: 'apiai-webhook-sample'
+            });
+          });
         } else if (requestBody.result.action == "input.unknown") {
           //speech += 'action: ' + requestBody.result.action;
           let input = requestBody.result.resolvedQuery;
