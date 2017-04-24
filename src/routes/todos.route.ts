@@ -33,7 +33,7 @@ export class TodoRouter {
    */
   public apiaiHook(req: Request, res: Response, next: NextFunction) {
     console.log("Hook Request");
-    var speech = 'empty speech';
+    let speech:string = 'empty speech';
 
     if (req.body) {
       var requestBody = req.body;
@@ -83,22 +83,24 @@ export class TodoRouter {
             let cantidad = removed.result.n;
             if(cantidad>0){
               let possibleAnswers = [
-                `${removed.length} todos matched and removed from your list, anything else?`,
-                `I've just removed ${removed.length} todos that matched, can i help you with something else?`,
-                `Your wishes are orders, ${removed.length} todos removed`,
-                `${removed.length} todos finished their existence, can i do anything else for you?`,
-                `Done, ${removed.length} todos were deleted, can i do any more things for you?`,
-                `Im happy to annouce you that ${removed.length} todos were kicked from your list, if you need anything else...`
+                `${cantidad} todos matched and removed from your list, anything else?`,
+                `I've just removed ${cantidad} todos that matched, can i help you with something else?`,
+                `Your wishes are orders, ${cantidad} todos removed`,
+                `${cantidad} todos finished their existence, can i do anything else for you?`,
+                `Done, ${cantidad} todos were deleted, can i do any more things for you?`,
+                `Im happy to annouce you that ${cantidad} todos were kicked from your list, if you need anything else...`
                ]
             let random = Math.floor(Math.random() * possibleAnswers.length);
             console.log("random value: ", random);
-            let speech = possibleAnswers[random];
+            speech = possibleAnswers[random];
             }else{
               let possibleAnswers = [
                 `Sorry, but i could not find any todo matching that criteria.`,
                 `I've just removed... Oops, 0 todos match those words... maybe try a different term`,
                 `Your wishes are orders, and i wish i could find any todo, but with those words there ar 0`,
                ]
+               let random = Math.floor(Math.random() * possibleAnswers.length);
+               speech = possibleAnswers[random];
             }
             
             return res.json({
