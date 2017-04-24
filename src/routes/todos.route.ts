@@ -55,12 +55,12 @@ export class TodoRouter {
               throw err;
             }
             let possibleAnswers = [
-              `${requestBody.result.parameters.todo} added to your list, anything else?`,
-              `I've just added ${requestBody.result.parameters.todo} to your list, can i help you with something else?`,
-              `Your wishes are orders, ${requestBody.result.parameters.todo} added, any other Todo?`,
-              `${requestBody.result.parameters.todo} shipped right onto the list, can i do anything else for you?`,
-              `Done, ${requestBody.result.parameters.todo} was added, can i do any more things for you?`,
-              `Im happy to annouce you that ${requestBody.result.parameters.todo} was added, if you need anything else...`
+              `${requestBody.result.parameters.todo} agregada a su lista, ¿Algo mas?`,
+              `Acabo de agregar ${requestBody.result.parameters.todo} a tu lista, ¿Puedo ayudarte con algo más?`,
+              `Sus deseos son ordenes, ${requestBody.result.parameters.todo} agregado, ¿Alguna otra tarea?`,
+              `${requestBody.result.parameters.todo} anotado en su lista, ¿Te puedo ayudar con algo más?`,
+              `Listo, ${requestBody.result.parameters.todo} agregado, ¿Alguna otra cosa?`,
+              `Tengo el placer de anunciarte que ${requestBody.result.parameters.todo} fue agregado, Avisame si necesitas algo más...`
             ]
             let random = Math.floor(Math.random() * possibleAnswers.length);
             console.log("random value: ", random);
@@ -80,10 +80,10 @@ export class TodoRouter {
             }
             if (results.length > 0) {
               let possibleAnswers = [
-                `Of course, here it goes`,
-                `This is your list`,
-                `As requested, enjoy it`,
-                `Yes, showing list right now`,
+                `Por supuesto, ahi va`,
+                `Esta es tu lista`,
+                `Tal como fue solicitado, tus tareas: `,
+                `Si, mostrando la lista ahora mismo`,
               ]
               let listText = "";
               var contador = 1;
@@ -101,10 +101,10 @@ export class TodoRouter {
               });
             } else {
               let possibleAnswers = [
-                `Yes but first add some, because its empty`,
-                `Maybe you could add a few, right now it has zero`,
-                `As requested, enjoy an empty list (?`,
-                `I'd suggest you to add some, because there is no todos to show right now`,
+                `Por supuesto, pero primero deberas agregar alguna porque esta vacia`,
+                `Quizas podrias agregar algunas, en este momento hay cero`,
+                `Lamento informarte que tu lista esta vacia`,
+                `Te sugiero que añadas algunas, porque ahora mismo no hay ninguna`,
               ]
               
               let random = Math.floor(Math.random() * possibleAnswers.length);
@@ -132,12 +132,12 @@ export class TodoRouter {
             console.log(cantidad > 0);
             if (cantidad > 0) {
               let possibleAnswers = [
-                `${cantidad} todos matched and removed from your list, anything else?`,
-                `I've just removed ${cantidad} todos that matched, can i help you with something else?`,
-                `Your wishes are orders, ${cantidad} todos removed`,
-                `${cantidad} todos finished their existence, can i do anything else for you?`,
-                `Done, ${cantidad} todos were deleted, can i do any more things for you?`,
-                `Im happy to annouce you that ${cantidad} todos were kicked from your list, if you need anything else...`
+                `${cantidad} tareas conicidieron y fueron borradas, ¿Algo más?`,
+                `He borrado ${cantidad} tareas que coincidieron, ¿Puedo ayudarte con algo más?`,
+                `Tus deseos son ordenes, ${cantidad} tareas borradas`,
+                `${cantidad} tareas dejaron de existir, ¿Algo mas que pueda hacer por ti?`,
+                `Listo, ${cantidad} tareas borradas, ¿Se te ofrece algo más?`,
+                `Es un placer comunicarte que ${cantidad} tareas fueron expulsadas de la lista, hazme saber si necesitas algo más...`
               ]
               let random = Math.floor(Math.random() * possibleAnswers.length);
               console.log("random value: ", random);
@@ -149,9 +149,9 @@ export class TodoRouter {
               });
             } else {
               let possibleAnswers = [
-                `Sorry, but i could not find any todo matching that criteria.`,
-                `I've just removed... Oops, 0 todos match those words... maybe try a different term`,
-                `Your wishes are orders, and i wish i could find any todo, but with those words there ar 0`,
+                `Perdon, pero no hay tareas que coincidan con eso`,
+                `He borrado... Ups, ninguna tarea coincide con ese criterio... ¿Podemos intentar uno diferente?`,
+                `Sus deseos son ordenes, Y desearia poder cumplirla, pero con ese criterio no hay ninguna tarea`,
               ]
               let random = Math.floor(Math.random() * possibleAnswers.length);
               let speech = possibleAnswers[random];
@@ -180,28 +180,28 @@ export class TodoRouter {
             if (sentiment) {
               if (sentiment.score <= -0.3) {
                 return res.json({
-                  speech: "Whoaaa take it easy man, im just a poor bot",
-                  displayText: "Whoaaa take it easy man, im just a poor bot",
+                  speech: "Uhhh tranquilo por favor, solo soy un simple robot",
+                  displayText: "Uhhh tranquilo por favor, solo soy un simple robot",
                   source: 'apiai-webhook-sample'
                 });
               } else if (sentiment.score > 0.3) {
                 return res.json({
-                  speech: "Its always great to talk with nice people",
-                  displayText: "Its always great to talk with nice people",
+                  speech: "Siempre es agradable charlar con gente amable",
+                  displayText: "Siempre es agradable charlar con gente amable",
                   source: 'apiai-webhook-sample'
                 });
               } else {
                 return res.json({
-                  speech: "Sorry, i dont understand",
-                  displayText: "Sorry, i dont understand",
+                  speech: "¿Perdon? No entiendo lo que me pides, ¿Puedes decirlo de otra manera?",
+                  displayText: "¿Perdon? No entiendo lo que me pides, ¿Puedes decirlo de otra manera?",
                   source: 'apiai-webhook-sample'
                 });
               }
 
             } else {
               return res.json({
-                speech: "Sorry, i dont understand",
-                displayText: "Sorry, i dont understand",
+                speech: "¿Perdon? No entiendo lo que me pides, ¿Puedes decirlo de otra manera?",
+                displayText: "¿Perdon? No entiendo lo que me pides, ¿Puedes decirlo de otra manera?",
                 source: 'apiai-webhook-sample'
               });
             }
