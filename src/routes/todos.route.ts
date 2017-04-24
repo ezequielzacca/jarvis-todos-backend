@@ -75,7 +75,7 @@ export class TodoRouter {
           //speech += 'action: ' + requestBody.result.action;
           console.log("Action is ", requestBody.result.action);
           console.log("Todo to delete is ", requestBody.result.parameters.todo);
-          database.getDB().collection('todos').findAndRemove({$text:{$search:requestBody.result.parameters.todo}}, (err, removed) => {
+          database.getDB().collection('todos').remove({$text:{$search:requestBody.result.parameters.todo}}, (err, removed) => {
             if (err) {
               throw err;
             }
