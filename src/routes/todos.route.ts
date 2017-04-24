@@ -79,8 +79,10 @@ export class TodoRouter {
             if (err) {
               throw err;
             }
-            console.log(removed);
-            let possibleAnswers = [
+            console.log(removed.result.n);
+            let cantidad = removed.result.n;
+            if(cantidad>0){
+              let possibleAnswers = [
                 `${removed.length} todos matched and removed from your list, anything else?`,
                 `I've just removed ${removed.length} todos that matched, can i help you with something else?`,
                 `Your wishes are orders, ${removed.length} todos removed`,
@@ -91,6 +93,14 @@ export class TodoRouter {
             let random = Math.floor(Math.random() * possibleAnswers.length);
             console.log("random value: ", random);
             let speech = possibleAnswers[random];
+            }else{
+              let possibleAnswers = [
+                `Sorry, but i could not find any todo matching that criteria.`,
+                `I've just removed... Oops, 0 todos match those words... maybe try a different term`,
+                `Your wishes are orders, and i wish i could find any todo, but with those words there ar 0`,
+               ]
+            }
+            
             return res.json({
               speech: speech,
               displayText: speech,
